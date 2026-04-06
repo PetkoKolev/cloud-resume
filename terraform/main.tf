@@ -1,3 +1,11 @@
+terraform {
+  backend "s3" {
+    bucket = "petko-terraform-state"
+    key    = "cloud-resume/terraform.tfstate"
+    region = "eu-west-2"
+  }
+}
+
 provider "aws" {
   region = "eu-west-2"
 }
