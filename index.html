@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Petko Kolev | Cloud Engineer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>Petko Kolev</h1>
+      <p>Views: <span id="counter">Loading...</span></p>
+      <p>London, United Kingdom</p>
+      <p>07931630510 | petkokolev00@icloud.com</p>
+    </header>
+
+    <section>
+      <h2>Profile</h2>
+      <p>
+        Computer Science graduate with hands-on technical troubleshooting experience and a strong interest in cloud infrastructure and DevOps engineering. Currently working as a Technical Expert at Apple, analysing system diagnostics and solving complex technical problems.
+      </p>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <ul>
+        <li>AWS Fundamentals – EC2, IAM, networking, security groups</li>
+        <li>Programming – Java, Python (basic), JavaScript (fundamentals)</li>
+        <li>Infrastructure – Cloud architecture basics, DevOps lifecycle</li>
+        <li>Operating Systems – Linux exposure, CLI usage</li>
+        <li>Databases – SQL / MySQL</li>
+        <li>Version Control – Git basics</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <ul>
+        <li>
+          <strong>Flight Routing Application:</strong> Java app using Dijkstra’s algorithm to calculate routes.
+        </li>
+        <li>
+          <strong>Database Coursework:</strong> Designed relational schemas and SQL queries.
+        </li>
+        <li>
+          <strong>AWS Labs:</strong> EC2 deployment, IAM permissions, networking basics.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+
+      <h3>Technical Expert – Apple</h3>
+      <p>June 2022 – Present</p>
+      <ul>
+        <li>Diagnose hardware and software issues</li>
+        <li>Analyse system behaviour to identify root causes</li>
+        <li>Explain technical solutions clearly</li>
+        <li>Support team with complex troubleshooting</li>
+      </ul>
+
+      <h3>Senior Sales & iOS Technician – Stormfront</h3>
+      <p>2018 – 2022</p>
+      <ul>
+        <li>Performed diagnostics and repairs on Apple devices</li>
+        <li>Maintained repair documentation</li>
+        <li>Improved service efficiency</li>
+      </ul>
+
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <p>BSc Computer Science – Brunel University London (2019 – 2023)</p>
+    </section>
+
+    <section>
+      <h2>Languages</h2>
+      <p>English (Fluent), Bulgarian (Fluent)</p>
+    </section>
+
+  </div>
+
+</body>
+<script>
+async function updateCounter() {
+    try {
+        const response = await fetch("https://5x4g1um0la.execute-api.eu-west-2.amazonaws.com/prod/views");
+        const data = await response.json();
+
+        document.getElementById("counter").innerText = data.views;
+    } catch (error) {
+        console.error("Error fetching counter:", error);
+    }
+}
+
+updateCounter();
+</script>
+</html>
