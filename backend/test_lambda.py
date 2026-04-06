@@ -6,7 +6,7 @@ from lambda_function import lambda_handler
 @patch("lambda_function.table")
 def test_lambda_returns_200(mock_table):
     mock_table.update_item.return_value = {
-        "Attributes": {"count": 1}
+        "Attributes": {"views": 1}
     }
 
     event = {"httpMethod": "GET"}
@@ -18,7 +18,7 @@ def test_lambda_returns_200(mock_table):
 @patch("lambda_function.table")
 def test_lambda_returns_views_key(mock_table):
     mock_table.update_item.return_value = {
-        "Attributes": {"count": 1}
+        "Attributes": {"views": 1}
     }
 
     event = {"httpMethod": "GET"}
@@ -32,7 +32,7 @@ def test_lambda_returns_views_key(mock_table):
 @patch("lambda_function.table")
 def test_lambda_views_is_integer(mock_table):
     mock_table.update_item.return_value = {
-        "Attributes": {"count": 1}
+        "Attributes": {"views": 1}
     }
 
     event = {"httpMethod": "GET"}
