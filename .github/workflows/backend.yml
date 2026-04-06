@@ -37,6 +37,11 @@ jobs:
           cd terraform
           terraform init
 
+      - name: Zip Lambda
+        run: |
+          cd backend
+          zip lambda.zip lambda_function.py
+
       - name: Terraform Apply
         run: |
           cd terraform
