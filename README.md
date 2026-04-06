@@ -10,11 +10,11 @@
 
 ##  Overview
 
-This project is a cloud-hosted personal resume website built using AWS services. 
+This project is a cloud-hosted personal resume website built using AWS services.
 
-It demonstrates both frontend and backend cloud engineering concepts, including static website hosting, CDN distribution, serverless computing, NoSQL database integration, API integration and real-world debugging of cloud systems.
+It demonstrates both frontend and backend cloud engineering concepts, including static website hosting, CDN distribution, serverless computing, API integration, and NoSQL database design.
 
-The application evolved from a simple static site into a full-stack serverless application with a live visitor counter powered by AWS Lambda and DynamoDB.
+The application evolved from a simple static site into a full-stack serverless solution with a dynamic visitor counter powered by AWS Lambda and DynamoDB.
 
 ---
 
@@ -36,6 +36,7 @@ Cloud & Infrastructure
 - AWS CloudFront (CDN + HTTPS)
 - AWS Route 53 (DNS & Domain Management)
 - AWS Certificate Manager (SSL/TLS)
+- Terraform (Infrastructure as Code)
 
 Dev Tools
 - GitHub (Version Control)
@@ -57,6 +58,7 @@ Dev Tools
 - NoSQL database design with DynamoDB
 - Cache invalidation and CDN behaviour
 - Public vs private bucket access control
+- IAM roles and secure credential management
 
 ---
 
@@ -74,6 +76,7 @@ User (Browser) → CloudFront (CDN + HTTPS) →S3 (Static Website Hosting) → B
 - Dynamic visitor counter powered by serverless backend
 - Real-time database updates using DynamoDB
 - Fully integrated frontend and backend architecture
+- Infrastructure managed using Terraform
 
 ---
 
@@ -91,7 +94,9 @@ User (Browser) → CloudFront (CDN + HTTPS) →S3 (Static Website Hosting) → B
 - Differences between AWS-managed credentials (Lambda) vs local environments 
 - Debugging AWS SDK issues such as missing region and credentials
 - Running and validating backend logic logically using Pytest
-- Using terminal to interact with cloud services and run automated tests
+- Using terminal and AWS CLI for development and debugging
+- Managing infrastructure using Terraform
+- Handling Git issues related to large files and repository management (Terraform files above 750mb limit, caused commit history to reset)
 
 ---
 
@@ -120,9 +125,10 @@ Backend tests were implemented using purest to validate Lambda function
 To run tests locally:
 
 1. Clone GitHub repo if not done already
-2. In terminal, write cd (file path/project name) and use ls to verify in correct folder
+2. In terminal, write cd (file path/project name) and use ls to verify in correct folder (folder directory)
 3. Write cd backend to access backend subfolder
-4. Python command of: python3 -m pytest 
+4. Python command of: python3 -m pytest to run tests
+Note: AWS credentials and region must be configured locally using the AWS CLI.
 
 ---
 
@@ -153,15 +159,16 @@ To run tests locally:
 - Debugged CloudFront caching issues causing stale frontend data
 - Resolved AWS credential errors when running code locally (NoCredentialsError during unit testing through terminal)
 - Debugged region misconfig between local environment and deployed AWS services
+- Resolved GitHub push failures due to large Terraform provider files
 
 ---
 
 ##  Future Improvements
 
 - Improve API design (separate GET and POST reqeusts)
-- Implement Infrastructure as Code using Terraform or AWS SAM
+- Expand Terraform configuration to fully manage infrastructure
 - Set up CI/CD pipeline for automated deployments using GitHub Actions
 - Migrate to private S3 bucket using CloudFront Origin Access Control (OAC)
-- Add unit tests for Lambda functions
-- Add caching strategy optimisation in CloudFront
+- Expand unit and integration test coverage
+- Optimise caching strategy in CloudFront
 - Create blog post documenting full build process
