@@ -5,3 +5,10 @@
 
 # Mac
 .DS_Store
+
+# Pycache
+__pycache__/
+*.pyc
+
+# ZIP
+*.zip
