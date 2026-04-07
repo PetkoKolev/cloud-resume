@@ -26,6 +26,10 @@ jobs:
           aws s3 sync . s3://petko-cloud-resume-1 \
             --exclude ".git/*" \
             --exclude ".github/*" \
+            --exclude "backend/*" \
+            --exclude "terraform/*" \
+            --exclude "*.md" \
+            --exclude ".gitignore" \
             --delete
 
       - name: Invalidate CloudFront cache
