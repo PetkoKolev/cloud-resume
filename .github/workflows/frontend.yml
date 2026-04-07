@@ -23,7 +23,10 @@ jobs:
 
       - name: Upload to S3
         run: |
-          aws s3 sync frontend/ s3://petko-cloud-resume-1 --delete
+          aws s3 sync . s3://petko-cloud-resume-1 \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --delete
 
       - name: Invalidate CloudFront cache
         run: |
