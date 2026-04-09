@@ -6,7 +6,7 @@ import time
 dynamodb = boto3.resource('dynamodb', region_name='eu-west-2')
 table = dynamodb.Table('ResumeViewCount')
 
-cloudwatch = boto3.client('cloudwatch')
+cloudwatch = boto3.client('cloudwatch', region_name='eu-west-2')
 
 def lambda_handler(event, context):
     try:
