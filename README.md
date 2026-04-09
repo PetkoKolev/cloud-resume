@@ -12,9 +12,31 @@
 
 This project is a cloud-hosted personal resume website built using AWS services.
 
-It demonstrates both frontend and backend cloud engineering concepts, including static website hosting, CDN distribution, serverless computing, API integration, and NoSQL database design.
+It demonstrates both frontend and backend cloud engineering concepts, including static website hosting, CDN distribution, serverless computing, API integration, and NoSQL database design, alongside CI/CD pipelines and observability.
 
-The application evolved from a simple static site into a full-stack serverless solution with a dynamic visitor counter powered by AWS Lambda and DynamoDB.
+It started as a static site and evolved into a full-stack serverless application with automated deployments through GitHub Actions, infrastructure as code using Terraform, and real-time monitoring using CloudWatch.
+
+---
+
+##  CI/CD Pipeline (Github Actions)
+
+This project uses GitHub Actions to automate testing and deployment
+
+Backend Pipeline:
+- Runs Python tests using Pytest
+- Packages Lambda function
+- Deploys Infrastructure using Terraform
+- Applies changes automatically on push to main branch
+
+Frontend Pipeline
+- Syncs frontend files to S3
+- Invalidates CloudFront cache to ensure latest content is served
+
+Key Features
+- Automated depolyment on code changes
+- Infrastructure as Code (Terraform)
+- Secure AWS authentication using GitHub Secrets
+- Separate frontend and backend workdlors
 
 ---
 
@@ -40,6 +62,7 @@ Cloud & Infrastructure
 
 Dev Tools
 - GitHub (Version Control)
+- GitHub Actions (CI/CD)
 - VS Code
 - Pytest (Backend testing)
 - AWS CLI (Local development & Authentication)
@@ -59,12 +82,19 @@ Dev Tools
 - Cache invalidation and CDN behaviour
 - Public vs private bucket access control
 - IAM roles and secure credential management
+- Infrastructure as Code using Terraform
+- CI/CD automation using GitHub Actions
+- Observability using CloudWatch metrics
 
 ---
 
 ##  Architecture Diagram
 
-User (Browser) → CloudFront (CDN + HTTPS) →S3 (Static Website Hosting) → Browser (JavaScript) → API Gateway → Lambda Function (Python) → DynamoDB (Visitor Counter)
+User (Browser) → CloudFront (CDN + HTTPS) →S3 (Static Website Hosting) → Browser (JavaScript) → API Gateway → Lambda Function (Python) → DynamoDB (Visitor Counter) → CloudWatch (Metrics & Logs)
+
+CI/CD:
+GitHub → GitHub Actions → AWS (Terraform + Deployment)
+
 ---
 
 ##  Features
@@ -77,6 +107,8 @@ User (Browser) → CloudFront (CDN + HTTPS) →S3 (Static Website Hosting) → B
 - Real-time database updates using DynamoDB
 - Fully integrated frontend and backend architecture
 - Infrastructure managed using Terraform
+- Automated CI/CD pipelines for deployment
+- Real-time monitoring using CloudWatch metrics
 
 ---
 
@@ -97,6 +129,7 @@ User (Browser) → CloudFront (CDN + HTTPS) →S3 (Static Website Hosting) → B
 - Using terminal and AWS CLI for development and debugging
 - Managing infrastructure using Terraform
 - Handling Git issues related to large files and repository management (Terraform files above 750mb limit, caused commit history to reset)
+- Handling Git issues of logic (implementing try and catch to enable the code to still execute even if the lab environment have no credentials for AWS services to avoid hardcoded credentials which would reduce security)
 
 ---
 
@@ -106,8 +139,9 @@ User (Browser) → CloudFront (CDN + HTTPS) →S3 (Static Website Hosting) → B
 2.	JavaScript sends a request to API Gateway
 3.	API Gateway triggers Lambda function
 4.	Lambda increments the counter in DynamoDB
-5.	Updated count is returned to the frontend
-6.	Visitor counter is displayed on the page
+5.	Lambda publishes a metric to CloudWatch
+6.	Updated count is returned to the frontend
+7.	Visitor counter is displayed on the page
 
 ---
 
@@ -116,8 +150,8 @@ Backend tests were implemented using purest to validate Lambda function
 
 - Verified status codes and response structure
 - Ensured visitor counter increments correctly 
-- Tests executed locally using Python and terminal CLI
-- Integrated AWS SDK (boto3) for real DynamoDB interaction
+- Tests executed automatically in CI pipeline
+- Mockinh used to isolate AWS dependencies (DynamoDB and CloudWatch in lambda function)
 
 ---
 
@@ -133,7 +167,7 @@ Note: AWS credentials and region must be configured locally using the AWS CLI.
 ---
 
 ##  How to Deploy
-
+OLD METHOD BEFORE CI/CD PIPELINE
 1. Create an S3 bucket and enable static website hosting  
 2. Upload HTML, CSS and JavaScript files  
 3. Configure bucket policy for public access  
@@ -145,7 +179,18 @@ Note: AWS credentials and region must be configured locally using the AWS CLI.
 9. Deploy Lambda function (Python)
 10. Create API Gateway (HTTP API) and connect to Lambda
 11. Connect frontend JavaScript to API endpoint
-12. Invalidate CloudFront cache after updates (may load previous versions containing old JavaScript if not done) 
+12. Invalidate CloudFront cache after updates (may load previous versions containing old JavaScript if not done)
+
+NEW METHOD
+Infrastructure and deployments are automated using Terraform and GitHub Actions
+
+Backend:
+- Terraform provisions Lambda, API Gateway, DynamoDB, IAM roles
+- CI pipeline runs tests and deploys automatically
+
+Frontend:
+- Files uploaded to S3 via CI pipeline
+- CloudFront cache invalidated after updates 
 
 ---
 
@@ -157,18 +202,33 @@ Note: AWS credentials and region must be configured locally using the AWS CLI.
 - Handled DynamoDB reserved keyword issue (views)
 - Resolved data inconsistency caused by multiple counter records
 - Debugged CloudFront caching issues causing stale frontend data
-- Resolved AWS credential errors when running code locally (NoCredentialsError during unit testing through terminal)
+- Resolved AWS credential errors when running code locally (NoCredentialsError during unit testing through terminal) and in CI environments
 - Debugged region misconfig between local environment and deployed AWS services
 - Resolved GitHub push failures due to large Terraform provider files
+- Fixed GitHub Actions pipeline failures (missing credentials, file paths)
+- Resolved IAM permission issues for CloudWatch metrics (CloudWatch:PutMetricData) 
 
 ---
 
 ##  Future Improvements
 
 - Improve API design (separate GET and POST reqeusts)
-- Expand Terraform configuration to fully manage infrastructure
-- Set up CI/CD pipeline for automated deployments using GitHub Actions
+- Add CloudWatch alarms for traffic spikes 
+- Expand Terraform configuration to fully modular infrastructure
 - Migrate to private S3 bucket using CloudFront Origin Access Control (OAC)
 - Expand unit and integration test coverage
-- Optimise caching strategy in CloudFront
+- Enhance secuirty using leastpriviledge IAM policies instead of FullAccess during build process
 - Create blog post documenting full build process
+
+---
+
+##  Why This Project
+
+This project demonstrates practical cloud-engineering skills beyond theory, including the following:
+
+- Building and deploying serverless applications
+- Automateing infrastructure using Terraform
+- Implementing CI/CD pipelines
+- Applying monitoring and observability practices
+
+It reflects on real-world workflows to simulate DevOps and cloud engineering roles to help with my own career progression
