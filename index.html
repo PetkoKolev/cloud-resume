@@ -5,92 +5,95 @@
   <title>Petko Kolev | Cloud Engineer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <header>
-      <h1>Petko Kolev</h1>
-      <p>Views: <span id="counter">Loading...</span></p>
-      <p>London, United Kingdom</p>
-      <p>07931630510 | petkokolev00@icloud.com</p>
-    </header>
+  <!-- HEADER -->
+  <header>
+    <h1>Petko Kolev</h1>
+    <p class="meta">
+      London, UK | petkokolev00@icloud.com | 07931630510 |
+      <a href="https://github.com/PetkoKolev/cloud-resume" target="_blank">GitHub</a>
+    </p>
+    <p class="views">Views: <span id="counter">Loading...</span></p>
+  </header>
 
-    <section>
-      <h2>Profile</h2>
-      <p>
-        Computer Science graduate with hands-on technical troubleshooting experience and a strong interest in cloud infrastructure and DevOps engineering. Currently working as a Technical Expert at Apple, analysing system diagnostics and solving complex technical problems.
-      </p>
-    </section>
+  <!-- PROJECTS -->
+  <section>
+    <h2>Projects</h2>
 
-    <section>
-      <h2>Technical Skills</h2>
-      <ul>
-        <li>AWS Fundamentals – EC2, IAM, networking, security groups</li>
-        <li>Programming – Java, Python (basic), JavaScript (fundamentals)</li>
-        <li>Infrastructure – Cloud architecture basics, DevOps lifecycle</li>
-        <li>Operating Systems – Linux exposure, CLI usage</li>
-        <li>Databases – SQL / MySQL</li>
-        <li>Version Control – Git basics</li>
-      </ul>
-    </section>
+    <h3>
+      Cloud Resume Challenge (AWS)
+      <a href="https://github.com/PetkoKolev/cloud-resume" target="_blank">[GitHub]</a>
+    </h3>
 
-    <section>
-      <h2>Projects</h2>
-      <ul>
-        <li>
-          <strong>Flight Routing Application:</strong> Java app using Dijkstra’s algorithm to calculate routes.
-        </li>
-        <li>
-          <strong>Database Coursework:</strong> Designed relational schemas and SQL queries.
-        </li>
-        <li>
-          <strong>AWS Labs:</strong> EC2 deployment, IAM permissions, networking basics.
-        </li>
-      </ul>
-    </section>
+    <ul>
+      <li>Designed and deployed a full-stack serverless application using AWS (S3, CloudFront, API Gateway, Lambda, DynamoDB)</li>
+      <li>Implemented Infrastructure as Code using Terraform to provision and manage cloud resources</li>
+      <li>Built CI/CD pipelines using GitHub Actions to automate testing and deployment</li>
+      <li>Developed backend logic in Python (AWS Lambda) to process API requests and maintain a visitor counter</li>
+      <li>Integrated DynamoDB with atomic updates for persistent data storage</li>
+      <li>Implemented CloudWatch logging and custom metrics for monitoring application usage</li>
+      <li>Configured IAM roles and API Gateway integrations securely</li>
+      <li>Automated CloudFront cache invalidation in deployment pipeline</li>
+      <li>Debugged real-world issues including IAM permissions, caching, and CI/CD failures</li>
+    </ul>
+  </section>
 
-    <section>
-      <h2>Experience</h2>
+  <!-- EXPERIENCE -->
+  <section>
+    <h2>Experience</h2>
 
-      <h3>Technical Expert – Apple</h3>
-      <p>June 2022 – Present</p>
-      <ul>
-        <li>Diagnose hardware and software issues</li>
-        <li>Analyse system behaviour to identify root causes</li>
-        <li>Explain technical solutions clearly</li>
-        <li>Support team with complex troubleshooting</li>
-      </ul>
+    <h3>Technical Expert – Apple</h3>
+    <p class="date">June 2022 – Present</p>
+    <ul>
+      <li>Diagnose and resolve complex hardware and software issues using structured troubleshooting</li>
+      <li>Handle high-volume technical cases in a fast-paced environment</li>
+      <li>Maintain high repair success rate ensuring accuracy and reliability</li>
+      <li>Apply root cause analysis transferable to cloud and production systems</li>
+      <li>Recognized for communication, teamwork, and leadership</li>
+    </ul>
 
-      <h3>Senior Sales & iOS Technician – Stormfront</h3>
-      <p>2018 – 2022</p>
-      <ul>
-        <li>Performed diagnostics and repairs on Apple devices</li>
-        <li>Maintained repair documentation</li>
-        <li>Improved service efficiency</li>
-      </ul>
+    <h3>Supervisor – Select Tech Group (Stormfront)</h3>
+    <p class="date">2018 – 2022</p>
+    <ul>
+      <li>Delivered technical support and troubleshooting for Apple devices</li>
+      <li>Supervised operations and supported team performance</li>
+      <li>Handled complex escalations and customer cases</li>
+      <li>Maintained documentation and improved internal processes</li>
+    </ul>
+  </section>
 
-    </section>
+  <!-- SKILLS -->
+  <section>
+    <h2>Skills</h2>
 
-    <section>
-      <h2>Education</h2>
-      <p>BSc Computer Science – Brunel University London (2019 – 2023)</p>
-    </section>
+    <p><strong>Cloud:</strong> AWS (S3, CloudFront, API Gateway, Lambda, DynamoDB, IAM, CloudWatch)</p>
+    <p><strong>Infrastructure:</strong> Terraform (Infrastructure as Code)</p>
+    <p><strong>CI/CD:</strong> GitHub Actions, CI/CD concepts</p>
+    <p><strong>Programming:</strong> Python, Java, JavaScript, SQL</p>
+    <p><strong>Tools:</strong> Git, REST APIs, HTTP APIs</p>
+    <p><strong>Systems:</strong> Linux, macOS, Windows</p>
+    <p><strong>Networking:</strong> HTTP, DNS, TCP/IP fundamentals</p>
 
-    <section>
-      <h2>Languages</h2>
-      <p>English (Fluent), Bulgarian (Fluent)</p>
-    </section>
+  </section>
 
-  </div>
+  <!-- EDUCATION -->
+  <section>
+    <h2>Education</h2>
+    <p>BSc Computer Science – Brunel University London (2023)</p>
+  </section>
 
-</body>
+</div>
+
+<!-- COUNTER SCRIPT -->
 <script>
 async function updateCounter() {
     try {
         const response = await fetch("https://5x4g1um0la.execute-api.eu-west-2.amazonaws.com/prod/views");
         const data = await response.json();
-
         document.getElementById("counter").innerText = data.views;
     } catch (error) {
         console.error("Error fetching counter:", error);
@@ -99,4 +102,6 @@ async function updateCounter() {
 
 updateCounter();
 </script>
+
+</body>
 </html>
