@@ -28,17 +28,21 @@ def lambda_handler(event, context):
 
         print(f"Updated view count: {views}")
 
-        cloudwatch.put_metric_data(
-            Namespace='ResumeApp',
-            MetricData=[
-                {
-                    'MetricName': 'ViewCount',
-                    'Value': 1,
-                    'Unit': 'Count'
-                }
-            ]
-        )
-
+        try:
+            cloudwatch.put_metric_data(
+                Namespace='ResumeApp',
+                MetricData=[
+                    {    
+                        'MetricName': 'ViewCount',
+                        'Value': 1,
+                        'Unit': 'Count'
+                    }
+                ]
+            )
+        except Exception as e:
+            print(f"CloudWatch error {e}")
+        
+        
         return {
             'statusCode': 200,
             'headers': {
