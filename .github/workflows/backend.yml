@@ -2,10 +2,13 @@ name: Backend CI/CD
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'backend/**'
       - 'terraform/**'
       - '.github/workflows/backend.yml'
+  workflow_dispatch:
 
 jobs:
   test-and-deploy:
