@@ -108,6 +108,10 @@ resource "aws_apigatewayv2_stage" "prod" {
   api_id      = aws_apigatewayv2_api.resume_api.id
   name        = "prod"
   auto_deploy = true
+
+default_route_settings {
+  logging_level = "OFF"
+  }
 }
 
 output "api_url" {
