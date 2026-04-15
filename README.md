@@ -14,21 +14,21 @@ This project is a full-stack serverless cloud application that hosts my personal
 
 It demonstrates real-world cloud engineering and DevOps practices, including infrastructure as code, CI/CD automation, API security, rate limiting, and observability.
 
-Originally built as a static site, it evolved into a production-style system with a secure backend, automated deployments, and resilience testing under load.
+Originally built as a static site, it evolved into a production-style system with a secure backend, automated deployments, monitoring, and resilience testing under load.
 
 ---
 
 ## CI/CD Pipeline (GitHub Actions)
 
 ### Backend Pipeline
-- Runs Python tests using Pytest
-- Packages Lambda function
-- Deploys infrastructure using Terraform
-- Applies changes automatically on push to main branch
+- Runs Python tests using Pytest  
+- Packages Lambda function  
+- Deploys infrastructure using Terraform  
+- Applies changes automatically on push to main branch  
 
 ### Frontend Pipeline
-- Syncs frontend files to S3
-- Invalidates CloudFront cache to ensure latest content is served
+- Syncs frontend files to S3  
+- Invalidates CloudFront cache to ensure latest content is served  
 
 ### Key Features
 - Automated deployment on code changes  
@@ -44,24 +44,24 @@ Originally built as a static site, it evolved into a production-style system wit
 - HTML, CSS, JavaScript (Fetch API)
 
 ### Backend (Serverless)
-- AWS Lambda (Python)
-- Amazon DynamoDB
-- AWS API Gateway (HTTP API)
-- Lambda Authorizer (custom authentication)
+- AWS Lambda (Python)  
+- Amazon DynamoDB  
+- AWS API Gateway (HTTP API)  
+- Lambda Authorizer (custom authentication)  
 
 ### Cloud & Infrastructure
-- AWS S3 (Static Website Hosting)
-- AWS CloudFront (CDN + HTTPS)
-- AWS Route 53 (DNS)
-- AWS Certificate Manager (SSL)
-- Terraform (Infrastructure as Code)
+- AWS S3 (Static Website Hosting)  
+- AWS CloudFront (CDN + HTTPS)  
+- AWS Route 53 (DNS)  
+- AWS Certificate Manager (SSL)  
+- Terraform (Infrastructure as Code)  
 
 ### Dev Tools
-- GitHub (Version Control)
-- GitHub Actions (CI/CD)
-- Pytest (Backend testing)
-- AWS CLI
-- VS Code / Terminal
+- GitHub (Version Control)  
+- GitHub Actions (CI/CD)  
+- Pytest (Backend testing)  
+- AWS CLI  
+- VS Code / Terminal  
 
 ---
 
@@ -77,10 +77,17 @@ Originally built as a static site, it evolved into a production-style system wit
 - IAM roles and secure access control  
 - Infrastructure as Code (Terraform)  
 - CI/CD automation with GitHub Actions  
-- Observability using CloudWatch  
+
+### Observability & Monitoring
+- CloudWatch metrics for system monitoring  
+- CloudWatch alarms with SNS notifications  
+- API Gateway access logging using CloudWatch Logs  
+- Structured JSON logging for request tracing  
+- Debugging API failures using CloudWatch Logs Insights  
+
+### Security & Performance
 - API security using Lambda Authorizers  
-- Rate limiting and throttling
-- Monitoring and alerting using CloudWatch and SNS
+- Rate limiting and throttling  
 
 ---
 
@@ -94,10 +101,10 @@ User (Browser)
 → Lambda Authorizer (Authentication)  
 → Lambda Function  
 → DynamoDB (Visitor Counter)  
-→ CloudWatch (Metrics & Logs)
+→ CloudWatch (Metrics & Logs)  
 
 CI/CD:  
-GitHub → GitHub Actions → AWS
+GitHub → GitHub Actions → AWS  
 
 ---
 
@@ -109,7 +116,12 @@ GitHub → GitHub Actions → AWS
 - Dynamic visitor counter (serverless backend)  
 - Infrastructure managed with Terraform  
 - Automated CI/CD pipelines  
-- Real-time monitoring and alerting using CloudWatch and SNS
+
+### 📊 Observability
+- Real-time monitoring using CloudWatch metrics  
+- Automated alerting via CloudWatch Alarms and SNS  
+- API request logging using structured JSON logs  
+- Ability to trace and debug requests using request IDs  
 
 ### 🔐 Security
 - Custom Lambda Authorizer for API protection  
@@ -129,20 +141,29 @@ GitHub → GitHub Actions → AWS
 
 ---
 
-## Monitoring & Alerting
+## Monitoring & Observability
 
-Implemented real-time monitoring and alerting using AWS CloudWatch and SNS.
+Implemented both metrics-based monitoring and log-based observability using AWS CloudWatch and SNS.
 
-- Created CloudWatch alarms for:
-  - API Gateway 5xx errors (backend failures)
-  - API Gateway 4xx errors (client-side issues)
-  - Lambda function errors
-- Configured thresholds to trigger alerts on production issues
-- Integrated Amazon SNS to send real-time email notifications
-- Simulated system failures to validate alarm triggering and notification delivery
-- Verified end-to-end observability from API → Lambda → CloudWatch → SNS
+### Metrics & Alerts
+- CloudWatch alarms configured for:
+  - API Gateway 5xx errors (backend failures)  
+  - API Gateway 4xx errors (client-side issues)  
+  - Lambda function errors  
+- Threshold-based alerting for production issues  
+- Amazon SNS integration for real-time email notifications  
+- Simulated failures to validate alarm triggering  
 
-This ensures rapid detection and response to failures in a production-like environment.
+### Logging
+- Enabled API Gateway access logging to CloudWatch Logs  
+- Implemented structured JSON logs for each API request  
+- Captures request details including:
+  - HTTP method, route, status code  
+  - Source IP and request time  
+  - Integration errors for debugging  
+- Logs used for tracing requests and diagnosing failures  
+
+This provides both high-level system monitoring and deep request-level debugging.
 
 ---
 
@@ -191,18 +212,27 @@ Backend tests implemented using Pytest:
 - Writing testable backend code  
 - Automating deployments with CI/CD  
 - Using Terraform for infrastructure management  
+
+### Observability & Debugging
+- Difference between metrics and logs in monitoring systems  
+- How to configure API Gateway access logging  
+- Importance of structured logging (JSON) for debugging and querying  
+- Using CloudWatch Logs Insights to analyse API behaviour  
+- Setting up alerts for proactive system monitoring  
+
+### Performance & Resilience
 - Observing system behaviour under load  
+- Identifying bottlenecks and failure scenarios  
 
 ---
 
 ## Future Improvements
 
-- Add CloudWatch alarms and alerting  
+- Build CloudWatch dashboards for visual monitoring  
 - Introduce SQS for async processing  
 - Improve IAM policies (least privilege)  
 - Expand test coverage (integration tests)  
 - Modularise Terraform configuration  
-- Add dashboard for usage analytics  
 
 ---
 
