@@ -56,7 +56,7 @@ jobs:
       - name: Zip Lambda
         run: |
           cd backend
-          zip lambda.zip lambda_function.py
+          zip lambda.zip lambda_function.py authoriser.py
 
       - name: Terraform Plan
         run: |
