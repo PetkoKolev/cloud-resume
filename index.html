@@ -91,13 +91,24 @@
 <script>
 async function updateCounter() {
     try {
+        const API_URL = "https://5x4g1um0la.execute-api.eu-west-2.amazonaws.com/prod/views";
+
+        const headers = {
+            "authorization": "my-secret-token"
+        };
+
         // increment counter
-        await fetch("https://5x4g1um0la.execute-api.eu-west-2.amazonaws.com/prod/views", {
-            method: "POST"
+        await fetch(API_URL, {
+            method: "POST",
+            headers: headers
         });
 
         // fetch updated value
-        const response = await fetch("https://5x4g1um0la.execute-api.eu-west-2.amazonaws.com/prod/views");
+        const response = await fetch(API_URL, {
+            method: "GET",
+            headers: headers
+        });
+
         const data = await response.json();
 
         document.getElementById("counter").innerText = data.views;
