@@ -79,7 +79,8 @@ Originally built as a static site, it evolved into a production-style system wit
 - CI/CD automation with GitHub Actions  
 - Observability using CloudWatch  
 - API security using Lambda Authorizers  
-- Rate limiting and throttling  
+- Rate limiting and throttling
+- Monitoring and alerting using CloudWatch and SNS
 
 ---
 
@@ -108,7 +109,7 @@ GitHub → GitHub Actions → AWS
 - Dynamic visitor counter (serverless backend)  
 - Infrastructure managed with Terraform  
 - Automated CI/CD pipelines  
-- CloudWatch metrics and logging  
+- Real-time monitoring and alerting using CloudWatch and SNS
 
 ### 🔐 Security
 - Custom Lambda Authorizer for API protection  
@@ -125,6 +126,23 @@ GitHub → GitHub Actions → AWS
 - Observed system behaviour under high traffic  
 - Identified failure responses (503 Service Unavailable)  
 - Validated throttling effectiveness  
+
+---
+
+## Monitoring & Alerting
+
+Implemented real-time monitoring and alerting using AWS CloudWatch and SNS.
+
+- Created CloudWatch alarms for:
+  - API Gateway 5xx errors (backend failures)
+  - API Gateway 4xx errors (client-side issues)
+  - Lambda function errors
+- Configured thresholds to trigger alerts on production issues
+- Integrated Amazon SNS to send real-time email notifications
+- Simulated system failures to validate alarm triggering and notification delivery
+- Verified end-to-end observability from API → Lambda → CloudWatch → SNS
+
+This ensures rapid detection and response to failures in a production-like environment.
 
 ---
 
