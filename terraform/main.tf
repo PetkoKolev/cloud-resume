@@ -85,7 +85,7 @@ resource "aws_apigatewayv2_api" "resume_api" {
   cors_configuration {
     allow_origins = ["https://petkokolev-cloud.com",
     "https://www.petkokolev-cloud.com"]
-    allow_methods = ["GET"]
+    allow_methods = ["GET", "POST", "OPTIONS"]
     allow_headers = ["*"]
   }
 }
