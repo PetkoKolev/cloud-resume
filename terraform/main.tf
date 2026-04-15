@@ -59,6 +59,16 @@ resource "aws_lambda_function" "resume_lambda" {
   source_code_hash = filebase64sha256("../backend/lambda.zip")
 }
 
+resource "aws_lambda_function" "authoriser_lambda" {
+  function_name = "resume-authoriser"
+  role          = aws_iam_role.lambda_role.arn
+  handler       = "authoriser.lambda_handler"
+  runtime       = "python3.11"
+
+  filename         = "../backend/lambda.zip"
+  source_code_hash = filebase64sha256("../backend/lambda.zip")
+}
+
 resource "aws_lambda_permission" "api_gw" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
