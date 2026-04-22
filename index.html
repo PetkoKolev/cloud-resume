@@ -26,19 +26,20 @@
 
     <h3>
       Cloud Resume Challenge (AWS)
+      <p> Built and operated a production-style serverless system with CI/CD, monitoring, and API protection.</p>
       <a href="https://github.com/PetkoKolev/cloud-resume" target="_blank">[GitHub]</a>
     </h3>
 
     <ul>
       <li>Designed and deployed a full-stack serverless application using AWS (S3, CloudFront, API Gateway, Lambda, DynamoDB)</li>
       <li>Implemented Infrastructure as Code using Terraform to provision and manage cloud resources</li>
-      <li>Built CI/CD pipelines using GitHub Actions to automate testing and deployment</li>
-      <li>Developed backend logic in Python (AWS Lambda) to process API requests and maintain a visitor counter</li>
-      <li>Integrated DynamoDB with atomic updates for persistent data storage</li>
-      <li>Implemented CloudWatch logging and custom metrics for monitoring application usage</li>
-      <li>Configured IAM roles and API Gateway integrations securely</li>
-      <li>Automated CloudFront cache invalidation in deployment pipeline</li>
-      <li>Debugged real-world issues including IAM permissions, caching, and CI/CD failures</li>
+      <li>Built and integrated a REST API to handle HTTP requests and update a visitor counter</li>
+      <li>Automated deployments using CI/CD pipelines with GitHub Actions</li>
+      <li>Implemented structured logging and monitoring using CloudWatch Logs and custom metrics</li>
+      <li>Configured CloudWatch alarms (API 4xx, 5xx, Lambda errors) with SNS notifications</li>
+      <li>Debugged production issues including 403 errors caused by IAM misconfiguration and API failures</li>
+      <li>Used CloudWatch Logs to trace an AccessDeniedException and resolved it by updating IAM policies</li>
+      <li>Implemented API Gateway throttling to handle high request volumes and prevent abuse</li>
     </ul>
   </section>
 
