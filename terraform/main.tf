@@ -109,6 +109,11 @@ resource "aws_apigatewayv2_stage" "prod" {
   name        = "prod"
   auto_deploy = true
 
+  lifecycle {
+    ignore_change = all
+  }
+}
+
 default_route_settings {
   logging_level = "OFF"
   }
