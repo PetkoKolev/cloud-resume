@@ -1,4 +1,4 @@
-# Cloud Resume (AWS Project) 
+# Cloud Resume - Production Serverless Application (AWS)
 
 ## Live Demo
 
@@ -10,241 +10,204 @@
 
 ## Overview
 
-This project is a full-stack serverless cloud application that hosts my personal resume using AWS.
+A production-style serverless application built on AWS that serves a personal resume with a dynamic visitor counter.
 
-It demonstrates real-world cloud engineering and DevOps practices, including infrastructure as code, CI/CD automation, API security, rate limiting, and observability.
+This project goes beyond a static site by implementing:
 
-Originally built as a static site, it evolved into a production-style system with a secure backend, automated deployments, monitoring, and resilience testing under load.
-
----
-
-## CI/CD Pipeline (GitHub Actions)
-
-### Backend Pipeline
-- Runs Python tests using Pytest  
-- Packages Lambda function  
-- Deploys infrastructure using Terraform  
-- Applies changes automatically on push to main branch  
-
-### Frontend Pipeline
-- Syncs frontend files to S3  
-- Invalidates CloudFront cache to ensure latest content is served  
-
-### Key Features
-- Automated deployment on code changes  
-- Infrastructure as Code (Terraform)  
-- Secure AWS authentication using GitHub Secrets  
-- Separate frontend and backend workflows  
+* Infrastructure as Code with Terraform
+* CI/CD pipelines with GitHub Actions
+* Secure API with Lambda Authorizer
+* Monitoring, logging, and alerting using CloudWatch
+* Rate limiting and resilience testing under load
 
 ---
 
-## Technologies Used
+## Architecture Diagram
 
-### Frontend
-- HTML, CSS, JavaScript (Fetch API)
+```mermaid
+flowchart LR
 
-### Backend (Serverless)
-- AWS Lambda (Python)  
-- Amazon DynamoDB  
-- AWS API Gateway (HTTP API)  
-- Lambda Authorizer (custom authentication)  
+    User[User Browser]
 
-### Cloud & Infrastructure
-- AWS S3 (Static Website Hosting)  
-- AWS CloudFront (CDN + HTTPS)  
-- AWS Route 53 (DNS)  
-- AWS Certificate Manager (SSL)  
-- Terraform (Infrastructure as Code)  
+    CF[CloudFront<br/>CDN + HTTPS]
+    S3[S3<br/>Static Website]
 
-### Dev Tools
-- GitHub (Version Control)  
-- GitHub Actions (CI/CD)  
-- Pytest (Backend testing)  
-- AWS CLI  
-- VS Code / Terminal  
+    APIGW[API Gateway<br/>HTTP API]
+    AUTH[Lambda Authorizer<br/>Token Validation]
+    LAMBDA[Lambda Function<br/>Python]
+    DDB[(DynamoDB<br/>Visitor Counter)]
 
----
+    CW[CloudWatch<br/>Logs + Metrics]
+    SNS[SNS<br/>Email Alerts]
 
-## Key AWS Concepts
+    CI[GitHub Actions<br/>CI/CD]
 
-- Static website hosting using S3  
-- CDN distribution using CloudFront  
-- HTTPS with ACM certificates  
-- DNS routing using Route 53  
-- Serverless architecture with Lambda  
-- API design using API Gateway (HTTP API)  
-- NoSQL data modelling with DynamoDB  
-- IAM roles and secure access control  
-- Infrastructure as Code (Terraform)  
-- CI/CD automation with GitHub Actions  
+    User --> CF
+    CF --> S3
+    CF --> APIGW
 
-### Observability & Monitoring
-- CloudWatch metrics for system monitoring  
-- CloudWatch alarms with SNS notifications  
-- API Gateway access logging using CloudWatch Logs  
-- Structured JSON logging for request tracing  
-- Debugging API failures using CloudWatch Logs Insights  
+    APIGW --> AUTH
+    AUTH --> APIGW
 
-### Security & Performance
-- API security using Lambda Authorizers  
-- Rate limiting and throttling  
+    APIGW --> LAMBDA
+    LAMBDA --> DDB
+
+    LAMBDA --> CW
+    APIGW --> CW
+
+    CW --> SNS
+
+    CI --> CF
+    CI --> S3
+    CI --> APIGW
+    CI --> LAMBDA
+```
 
 ---
 
-## Architecture
+## Key Features
 
-User (Browser)  
-→ CloudFront (CDN + HTTPS)  
-→ S3 (Static Website Hosting)  
-→ JavaScript (Frontend)  
-→ API Gateway  
-→ Lambda Authorizer (Authentication)  
-→ Lambda Function  
-→ DynamoDB (Visitor Counter)  
-→ CloudWatch (Metrics & Logs)  
+1. Frontend & Delivery
 
-CI/CD:  
-GitHub → GitHub Actions → AWS  
+* Static website hosted on S3
+* Global distribution via CloudFront
+* Custom domain with HTTPS (ACM + Route 53)
 
----
+2. Serverless Backend
 
-## Features
+* REST API using API Gateway (HTTP API)
+* Lambda function for business logic
+* DynamoDB for persistent storage
+* Atomic updates for accurate visitor counting
 
-- Static resume website hosted on AWS  
-- Global content delivery via CloudFront  
-- Custom domain with HTTPS  
-- Dynamic visitor counter (serverless backend)  
-- Infrastructure managed with Terraform  
-- Automated CI/CD pipelines  
+3. Security
 
-### 📊 Observability
-- Real-time monitoring using CloudWatch metrics  
-- Automated alerting via CloudWatch Alarms and SNS  
-- API request logging using structured JSON logs  
-- Ability to trace and debug requests using request IDs  
+* Custom Lambda Authorizer for API protection
+* Token-based authentication via headers
+* Strict CORS policy for allowed domains
 
-### 🔐 Security
-- Custom Lambda Authorizer for API protection  
-- Token-based authentication via HTTP headers  
-- Restricted CORS to specific domain  
+4. Performance & Protection
 
-### 🚦 API Protection
-- Rate limiting using API Gateway throttling  
-- Burst and steady-state traffic control  
-- Protection against abuse and excessive requests  
+* API Gateway throttling (rate + burst limits)
+* Protection against excessive traffic
+* Load testing performed using parallel requests
 
-### 🔥 Resilience Testing
-- Load tested API using parallel requests (curl)  
-- Observed system behaviour under high traffic  
-- Identified failure responses (503 Service Unavailable)  
-- Validated throttling effectiveness  
+5. Observability
+
+* Structured logging in Lambda (JSON-style events)
+* CloudWatch Logs for request tracing
+* CloudWatch Alarms for:
+    * API 4xx errors
+    * API 5xx errors
+    * Lambda failures
+* SNS notifications for real-time alerts
 
 ---
 
-## Monitoring & Observability
+## CI/CD Pipeline
 
-Implemented both metrics-based monitoring and log-based observability using AWS CloudWatch and SNS.
+Backend Pipeline
 
-### Metrics & Alerts
-- CloudWatch alarms configured for:
-  - API Gateway 5xx errors (backend failures)  
-  - API Gateway 4xx errors (client-side issues)  
-  - Lambda function errors  
-- Threshold-based alerting for production issues  
-- Amazon SNS integration for real-time email notifications  
-- Simulated failures to validate alarm triggering  
+* Runs Pytest unit tests
+* Packages Lambda functions
+* Deploys infrastructure via Terraform
+* Auto-applies changes on push to main
 
-### Logging
-- Enabled API Gateway access logging to CloudWatch Logs  
-- Implemented structured JSON logs for each API request  
-- Captures request details including:
-  - HTTP method, route, status code  
-  - Source IP and request time  
-  - Integration errors for debugging  
-- Logs used for tracing requests and diagnosing failures  
+Frontend Pipeline
 
-This provides both high-level system monitoring and deep request-level debugging.
+* Syncs frontend files to S3
+* Invalidates CloudFront cache
 
 ---
 
-## How It Works (Visitor Counter)
+## How It Works (Request Flow)
 
-1. User visits the website  
-2. Frontend sends authenticated request to API Gateway  
-3. Lambda Authorizer validates request  
-4. Lambda function updates counter in DynamoDB  
-5. Metric sent to CloudWatch  
-6. Updated count returned to frontend  
-7. Displayed on UI  
-
----
-
-## Testing
-
-Backend tests implemented using Pytest:
-
-- Validates status codes and response structure  
-- Ensures counter logic works correctly  
-- Uses mocking to isolate AWS dependencies  
-- Runs automatically in CI pipeline  
+1. User loads website via CloudFront
+2. Frontend sends request to API Gateway
+3. Lambda Authorizer validates request
+4. Lambda function:
+    * Reads current count from DynamoDB
+    * Increments value atomically
+5. Updated count returned to frontend
+6. Logs + metrics sent to CloudWatch
 
 ---
 
-## Challenges Faced
+## Monitoring & Debugging
 
-- Debugging CloudFront caching issues  
-- Resolving IAM permission errors  
-- Handling DynamoDB reserved keywords  
-- Fixing CI/CD pipeline failures  
-- Managing Terraform state and large files  
-- Implementing secure CORS policies  
-- Debugging API authentication failures  
-- Handling rate limiting and backend saturation under load  
+* Real-time logs via CloudWatch Log Groups
+* Request-level tracing using request IDs
+* Logs include:
+    * Route + method
+    * Status codes
+    * Execution time
+* Failures trigger CloudWatch Alarms + SNS alerts
 
 ---
 
-## What I Learned
+## Tech Stack
 
-- Building full-stack serverless applications  
-- Designing secure APIs with authentication  
-- Implementing rate limiting and traffic control  
-- Debugging real-world cloud issues  
-- Writing testable backend code  
-- Automating deployments with CI/CD  
-- Using Terraform for infrastructure management  
+Frontend
 
-### Observability & Debugging
-- Difference between metrics and logs in monitoring systems  
-- How to configure API Gateway access logging  
-- Importance of structured logging (JSON) for debugging and querying  
-- Using CloudWatch Logs Insights to analyse API behaviour  
-- Setting up alerts for proactive system monitoring  
+* HTML, CSS, JavaScript
 
-### Performance & Resilience
-- Observing system behaviour under load  
-- Identifying bottlenecks and failure scenarios  
+Backend
+
+* AWS Lambda (Python)
+* API Gateway (HTTP API)
+* DynamoDB
+
+Infrastructure
+
+* Terraform
+* AWS S3, CloudFront, Route 53, ACM
+* IAM
+
+DevOps
+
+* GitHub Actions
+* Pytest
+
+---
+
+## Challenges & Solutions
+
+| Problem | Solution |
+|--------|---------|
+| CloudFront caching stale data | Implemented cache invalidation |
+| IAM permission errors | Fixed least-privilege role policies |
+| Terraform pipeline failures | Debugged CI/CD and state configuration |
+| API logging failures | Configured CloudWatch roles correctly |
+| Rate limiting under load | Applied API Gateway throttling |
+
+---
+
+## Key Learning
+
+* Designing real-world serverless architectures
+* Implementing secure APIs with authentication
+* Debugging distributed cloud systems
+* Using logs vs metrics effectively
+* Automating infrastructure with Terraform
+* Building CI/CD pipelines from scratch
 
 ---
 
 ## Future Improvements
 
-- Build CloudWatch dashboards for visual monitoring  
-- Introduce SQS for async processing  
-- Improve IAM policies (least privilege)  
-- Expand test coverage (integration tests)  
-- Modularise Terraform configuration  
+* CloudWatch dashboards for better visualisation
+* Introduce SQS for async processing
+* Improve IAM policies (least privilege)
+* Expand test coverage (integration tests)
+* Modularise Terraform configuration
 
 ---
 
-## Why This Project
+## Why This Project Matters
 
-This project demonstrates practical cloud engineering skills including:
+This project demonstrates:
 
-- Serverless architecture design  
-- Infrastructure automation  
-- CI/CD implementation  
-- API security and protection  
-- Observability and monitoring  
-- Real-world debugging and problem solving  
-
-It reflects production-style workflows and showcases readiness for cloud and DevOps engineering roles.
+* Real-world AWS architecture design
+* End-to-end DevOps workflow
+* Production-style monitoring & alerting
+* Strong debugging and problem-solving skills
