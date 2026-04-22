@@ -110,7 +110,7 @@ resource "aws_apigatewayv2_stage" "prod" {
   auto_deploy = true
 
   lifecycle {
-    ignore_change = all
+    ignore_changes = all
   }
 }
 
