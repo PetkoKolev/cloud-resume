@@ -114,11 +114,6 @@ resource "aws_apigatewayv2_stage" "prod" {
   }
 }
 
-default_route_settings {
-  logging_level = "OFF"
-  }
-}
-
 output "api_url" {
   value = aws_apigatewayv2_stage.prod.invoke_url
 }
