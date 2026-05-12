@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Petko Kolev | Cloud Engineer</title>
@@ -8,119 +9,150 @@
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <!-- HEADER -->
-  <header>
-    <h1>Petko Kolev</h1>
-    <p class="meta">
-      London, UK | petkokolev00@icloud.com | 07931630510 |
-      <a href="https://github.com/PetkoKolev/cloud-resume" target="_blank">GitHub</a>
-    </p>
-    <p class="views">Views: <span id="counter">Loading...</span></p>
-  </header>
+    <!-- HEADER -->
+    <header>
+      <h1>Petko Kolev</h1>
+      <p class="meta">
+        London, UK | petkokolev00@icloud.com | 07931630510 |
+        <a href="https://github.com/PetkoKolev/cloud-resume" target="_blank">GitHub</a>
+      </p>
+      <p class="views">Views: <span id="counter">Loading...</span></p>
+    </header>
 
-  <!-- PROJECTS -->
-  <section>
-    <h2>Projects</h2>
+    <!-- PROJECTS -->
+    <section>
+      <h2>Projects</h2>
 
-    <h3>
-      Cloud Resume Challenge (AWS)
-      <p> Built and operated a production-style serverless system with CI/CD, monitoring, and API protection.</p>
-      <a href="https://github.com/PetkoKolev/cloud-resume" target="_blank">[GitHub]</a>
-    </h3>
+      <!-- PROJECT 1 -->
+      <div class="project">
+        <h3>Cloud Resume Challenge (AWS)</h3>
+        <p class="project-summary">
+          Production-style serverless web application with Infrastructure as Code, CI/CD, monitoring, and API
+          protection.
+        </p>
+        <p>
+          <a href="https://github.com/PetkoKolev/cloud-resume" target="_blank">GitHub</a>
+        </p>
 
-    <ul>
-      <li>Designed and deployed a full-stack serverless application using AWS (S3, CloudFront, API Gateway, Lambda, DynamoDB)</li>
-      <li>Implemented Infrastructure as Code using Terraform to provision and manage cloud resources</li>
-      <li>Built and integrated a REST API to handle HTTP requests and update a visitor counter</li>
-      <li>Automated deployments using CI/CD pipelines with GitHub Actions</li>
-      <li>Implemented structured logging and monitoring using CloudWatch Logs and custom metrics</li>
-      <li>Configured CloudWatch alarms (API 4xx, 5xx, Lambda errors) with SNS notifications</li>
-      <li>Debugged production issues including 403 errors caused by IAM misconfiguration and API failures</li>
-      <li>Used CloudWatch Logs to trace an AccessDeniedException and resolved it by updating IAM policies</li>
-      <li>Implemented API Gateway throttling to handle high request volumes and prevent abuse</li>
-    </ul>
-  </section>
+        <ul>
+          <li>Designed and deployed a full-stack serverless application using AWS (S3, CloudFront, API Gateway, Lambda,
+            DynamoDB)</li>
+          <li>Provisioned infrastructure using Terraform</li>
+          <li>Built REST API backend for visitor counter updates</li>
+          <li>Implemented CI/CD deployment pipeline with GitHub Actions</li>
+          <li>Configured CloudWatch logging, alarms, and SNS notifications</li>
+          <li>Applied API Gateway throttling and IAM troubleshooting in production</li>
+        </ul>
+      </div>
 
-  <!-- EXPERIENCE -->
-  <section>
-    <h2>Experience</h2>
+      <!-- PROJECT 2 -->
+      <div class="project">
+        <h3>AWS Event-Driven Image Processing Pipeline</h3>
+        <p class="project-summary">
+          Event-driven serverless image upload and processing platform with asynchronous workflows, Terraform, CI/CD,
+          and custom domain delivery.
+        </p>
+        <p>
+          <a href="https://github.com/PetkoKolev/aws-event-driven-image-processor" target="_blank">GitHub</a>
+          |
+          <a href="https://ipp.petkokolev-cloud.com" target="_blank">Live Demo</a>
+        </p>
 
-    <h3>Technical Expert – Apple</h3>
-    <p class="date">June 2022 – Present</p>
-    <ul>
-      <li>Diagnose and resolve complex hardware and software issues using structured troubleshooting</li>
-      <li>Handle high-volume technical cases in a fast-paced environment</li>
-      <li>Maintain high repair success rate ensuring accuracy and reliability</li>
-      <li>Apply root cause analysis transferable to cloud and production systems</li>
-      <li>Recognized for communication, teamwork, and leadership</li>
-    </ul>
+        <ul>
+          <li>Built asynchronous image processing workflow using S3, SQS, Lambda, API Gateway, CloudFront, Route 53, and
+            ACM</li>
+          <li>Implemented pre-signed S3 uploads for secure client-side file transfer</li>
+          <li>Created polling-based frontend workflow for async processing feedback</li>
+          <li>Provisioned full infrastructure using Terraform</li>
+          <li>Automated deployment pipeline using GitHub Actions and Docker-based Lambda packaging</li>
+          <li>Configured custom domain with HTTPS using ACM + CloudFront</li>
+          <li>Implemented downloadable processed asset delivery using signed URLs</li>
+          <li>Debugged IAM, Route 53, DNS validation, and async event timing issues</li>
+        </ul>
+      </div>
+    </section>
 
-    <h3>Supervisor – Select Tech Group (Stormfront)</h3>
-    <p class="date">2018 – 2022</p>
-    <ul>
-      <li>Delivered technical support and troubleshooting for Apple devices</li>
-      <li>Supervised operations and supported team performance</li>
-      <li>Handled complex escalations and customer cases</li>
-      <li>Maintained documentation and improved internal processes</li>
-    </ul>
-  </section>
+    <!-- EXPERIENCE -->
+    <section>
+      <h2>Experience</h2>
 
-  <!-- SKILLS -->
-  <section>
-    <h2>Skills</h2>
+      <h3>Technical Expert – Apple</h3>
+      <p class="date">June 2022 – Present</p>
+      <ul>
+        <li>Diagnose and resolve complex hardware and software issues using structured troubleshooting</li>
+        <li>Handle high-volume technical cases in a fast-paced environment</li>
+        <li>Maintain high repair success rate ensuring accuracy and reliability</li>
+        <li>Apply root cause analysis transferable to cloud and production systems</li>
+        <li>Recognized for communication, teamwork, and leadership</li>
+      </ul>
 
-    <p><strong>Cloud:</strong> AWS (S3, CloudFront, API Gateway, Lambda, DynamoDB, IAM, CloudWatch)</p>
-    <p><strong>Infrastructure:</strong> Terraform (Infrastructure as Code)</p>
-    <p><strong>CI/CD:</strong> GitHub Actions, CI/CD concepts</p>
-    <p><strong>Programming:</strong> Python, Java, JavaScript, SQL</p>
-    <p><strong>Tools:</strong> Git, REST APIs, HTTP APIs</p>
-    <p><strong>Systems:</strong> Linux, macOS, Windows</p>
-    <p><strong>Networking:</strong> HTTP, DNS, TCP/IP fundamentals</p>
+      <h3>Supervisor – Select Tech Group (Stormfront)</h3>
+      <p class="date">2018 – 2022</p>
+      <ul>
+        <li>Delivered technical support and troubleshooting for Apple devices</li>
+        <li>Supervised operations and supported team performance</li>
+        <li>Handled complex escalations and customer cases</li>
+        <li>Maintained documentation and improved internal processes</li>
+      </ul>
+    </section>
 
-  </section>
+    <!-- SKILLS -->
+    <section>
+      <h2>Skills</h2>
 
-  <!-- EDUCATION -->
-  <section>
-    <h2>Education</h2>
-    <p>BSc Computer Science – Brunel University London (2023)</p>
-  </section>
+      <p><strong>Cloud:</strong> AWS (S3, CloudFront, API Gateway, Lambda, DynamoDB, SQS, IAM, Route 53, ACM,
+        CloudWatch, SNS)</p>
+      <p><strong>Infrastructure:</strong> Terraform (Infrastructure as Code)</p>
+      <p><strong>CI/CD:</strong> GitHub Actions, deployment pipelines, Docker-based build workflows</p>
+      <p><strong>Programming:</strong> Python, JavaScript, Java, SQL</p>
+      <p><strong>Tools:</strong> Git, REST APIs, HTTP APIs, Docker</p>
+      <p><strong>Systems:</strong> Linux, macOS, Windows</p>
+      <p><strong>Networking:</strong> HTTP, DNS, TCP/IP fundamentals, HTTPS, CORS</p>
+    </section>
 
-</div>
+    <!-- EDUCATION -->
+    <section>
+      <h2>Education</h2>
+      <p>BSc Computer Science – Brunel University London (2023)</p>
+    </section>
 
-<script>
-async function updateCounter() {
-    try {
+  </div>
+
+  <script>
+    async function updateCounter() {
+      try {
         const API_URL = "https://5x4g1um0la.execute-api.eu-west-2.amazonaws.com/prod/views";
 
         const headers = {
-            "authorization": "my-secret-token"
+          "authorization": "my-secret-token"
         };
 
         // increment counter
         await fetch(API_URL, {
-            method: "POST",
-            headers: headers
+          method: "POST",
+          headers: headers
         });
 
         // fetch updated value
         const response = await fetch(API_URL, {
-            method: "GET",
-            headers: headers
+          method: "GET",
+          headers: headers
         });
 
         const data = await response.json();
 
         document.getElementById("counter").innerText = data.views;
 
-    } catch (error) {
+      } catch (error) {
         console.error("Error:", error);
+      }
     }
-}
 
-updateCounter();
-</script>
+    updateCounter();
+  </script>
 
 </body>
+
 </html>
